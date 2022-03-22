@@ -10,6 +10,7 @@ namespace DevIO.Business.Models.Forncedores
         public string Documento { get; set; }
         public TipoForncedor TipoForncedor { get; set; }
         public Endereco Endereco { get; set; }
+        public bool Ativo { get; set; }
 
         // EF Relations
         public ICollection<Produto> Produtos { get; set; }
