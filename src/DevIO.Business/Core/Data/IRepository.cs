@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevIO.Business.Core.Data
 {
-    public interface IRepository<TEntity> where TEntity : Entity
+    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
         Task Adicionar(TEntity entity);
         Task<TEntity> ObterPorId(Guid id);
