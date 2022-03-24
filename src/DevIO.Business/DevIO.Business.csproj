@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.10.4.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -41,9 +44,13 @@
     <Compile Include="Models\Forncedores\IEnderecoRepository.cs" />
     <Compile Include="Models\Forncedores\IFornecedorRepository.cs" />
     <Compile Include="Models\Forncedores\TipoForncedor.cs" />
+    <Compile Include="Models\Forncedores\Validations\FornecedorValidation.cs" />
     <Compile Include="Models\Produtos\IProdutoRepository.cs" />
     <Compile Include="Models\Produtos\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
