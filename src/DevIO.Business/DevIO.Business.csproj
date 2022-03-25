@@ -39,15 +39,20 @@
   <ItemGroup>
     <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
+    <Compile Include="Core\Services\BaseService.cs" />
     <Compile Include="Core\Validations\Documentos\ValidacaoDocs.cs" />
     <Compile Include="Models\Forncedores\Endereco.cs" />
     <Compile Include="Models\Forncedores\Fornecedor.cs" />
     <Compile Include="Models\Forncedores\IEnderecoRepository.cs" />
     <Compile Include="Models\Forncedores\IFornecedorRepository.cs" />
-    <Compile Include="Models\Forncedores\TipoForncedor.cs" />
+    <Compile Include="Models\Forncedores\Services\FornecedorService.cs" />
+    <Compile Include="Models\Forncedores\Services\IFornecedorService.cs" />
+    <Compile Include="Models\Forncedores\TipoFornecedor.cs" />
+    <Compile Include="Models\Forncedores\Validations\EnderecoValidation.cs" />
     <Compile Include="Models\Forncedores\Validations\FornecedorValidation.cs" />
     <Compile Include="Models\Produtos\IProdutoRepository.cs" />
     <Compile Include="Models\Produtos\Produto.cs" />
+    <Compile Include="Models\Produtos\Validations\ProdutoValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
