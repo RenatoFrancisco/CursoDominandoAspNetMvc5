@@ -1,4 +1,4 @@
-﻿using DevIO.Business.Models.Forncedores;
+﻿using DevIO.Business.Models.Fornecedores;
 using FluentValidation;
 
 namespace DevIO.Business.Models.Fornecedores.Validations

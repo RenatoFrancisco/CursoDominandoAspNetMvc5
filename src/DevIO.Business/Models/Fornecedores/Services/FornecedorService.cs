@@ -1,12 +1,11 @@
 ﻿using DevIO.Business.Core.Notificacoes;
 using DevIO.Business.Core.Services;
-using DevIO.Business.Models.Forncedores.Validations;
 using DevIO.Business.Models.Fornecedores.Validations;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DevIO.Business.Models.Forncedores.Services
+namespace DevIO.Business.Models.Fornecedores.Services
 {
     public class FornecedorService : BaseService, IFornecedorService
     {

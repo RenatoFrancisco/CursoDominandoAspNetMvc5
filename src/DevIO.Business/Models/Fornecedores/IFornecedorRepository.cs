@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace DevIO.Business.Models.Forncedores
+namespace DevIO.Business.Models.Fornecedores
 {
     public interface IFornecedorRepository : IRepository<Fornecedor>
     {

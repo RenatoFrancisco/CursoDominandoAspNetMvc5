@@ -1,6 +1,6 @@
 ﻿using DevIO.Business.Core.Models;
 
-namespace DevIO.Business.Models.Forncedores
+namespace DevIO.Business.Models.Fornecedores
 {
     public class Endereco : Entity
     {

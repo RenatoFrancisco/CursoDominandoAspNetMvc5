@@ -2,7 +2,7 @@
 using DevIO.Business.Models.Produtos;
 using System.Collections.Generic;
 
-namespace DevIO.Business.Models.Forncedores
+namespace DevIO.Business.Models.Fornecedores
 {
     public class Fornecedor : Entity
     {

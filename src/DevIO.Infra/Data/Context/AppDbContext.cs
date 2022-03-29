@@ -1,4 +1,4 @@
-﻿using DevIO.Business.Models.Forncedores;
+﻿using DevIO.Business.Models.Fornecedores;
 using DevIO.Business.Models.Produtos;
 using DevIO.Infra.Data.Mappings;
 using System.Data.Entity;
@@ -35,7 +35,5 @@ namespace DevIO.Infra.Data.Context
 
             base.OnModelCreating(modelBuilder);
         }
-
-        public System.Data.Entity.DbSet<DevIO.AppMvc.ViewModels.ProdutoViewModel> ProdutoViewModels { get; set; }
     }
 }
