@@ -35,5 +35,7 @@ namespace DevIO.Infra.Data.Context
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<DevIO.AppMvc.ViewModels.ProdutoViewModel> ProdutoViewModels { get; set; }
     }
 }
