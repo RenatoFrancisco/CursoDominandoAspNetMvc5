@@ -1,4 +1,4 @@
-﻿using DevIO.Business.Models.Forncedores;
+﻿using DevIO.Business.Models.Fornecedores;
 using System.Data.Entity.ModelConfiguration;
 
 namespace DevIO.Infra.Data.Mappings

@@ -1,5 +1,5 @@
 ﻿using DevIO.Business.Core.Models;
-using DevIO.Business.Models.Forncedores;
+using DevIO.Business.Models.Fornecedores;
 using System;
 
 namespace DevIO.Business.Models.Produtos

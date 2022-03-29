@@ -1,4 +1,4 @@
-﻿using DevIO.Business.Models.Forncedores;
+﻿using DevIO.Business.Models.Fornecedores;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
