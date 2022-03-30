@@ -14,7 +14,7 @@ namespace DevIO.AppMvc
         {
             ConfigureAuth(app);
 
-            DependecyInjectionConfig.RegisterDIConfig();
+            DependencyInjectionConfig.RegisterDIConfig();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

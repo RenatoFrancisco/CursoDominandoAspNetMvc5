@@ -1,4 +1,5 @@
-﻿using DevIO.Business.Models.Fornecedores;
+﻿using DevIO.Business.Core.Notificacoes;
+using DevIO.Business.Models.Fornecedores;
 using DevIO.Business.Models.Produtos;
 using DevIO.Business.Models.Produtos.Services;
 using DevIO.Infra.Data.Context;
@@ -11,12 +12,12 @@ using System.Web.Mvc;
 
 namespace DevIO.AppMvc.App_Start
 {
-    public class DependecyInjectionConfig
+    public class DependencyInjectionConfig
     {
         public static void RegisterDIConfig()
         {
             var container = new Container();
-            container.Options.DefaultLifestyle = new WebRequestLifestyle();
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             InitializeContainer(container);
 
@@ -31,6 +32,7 @@ namespace DevIO.AppMvc.App_Start
         {
             container.Register<AppDbContext>(Lifestyle.Scoped);
             container.Register<IProdutoRepository, ProdutoRepository>(Lifestyle.Scoped);
+            container.Register<INotificador, Notificador>(Lifestyle.Scoped);
             container.Register<IProdutoService, ProdutoService>(Lifestyle.Scoped);
             container.Register<IFornecedorRepository, FornecedorRepository>(Lifestyle.Scoped);
             container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
