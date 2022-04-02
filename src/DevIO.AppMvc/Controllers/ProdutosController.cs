@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using DevIO.AppMvc.ViewModels;
-using DevIO.Business.Core.Notificacoes;
 using DevIO.Business.Models.Produtos;
 using DevIO.Business.Models.Produtos.Services;
-using DevIO.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +9,7 @@ using System.Web.Mvc;
 
 namespace DevIO.AppMvc.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoService _produtoService;
