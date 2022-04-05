@@ -30,6 +30,17 @@ namespace DevIO.AppMvc.Controllers
             View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
 
         [HttpGet]
+        [Route("dados-do-fornecedor/{id:guid}")]
+        public async Task<ActionResult> Details(Guid id)
+        {
+            var fornecedorViewModel = await ObterFornecedorEndereco(id);
+            if (fornecedorViewModel == null) return HttpNotFound();
+
+            return View(fornecedorViewModel);
+        }
+
+
+        [HttpGet]
         [Route("novo-fornecedor")]
         public async Task<ActionResult> Create() => View();
 
