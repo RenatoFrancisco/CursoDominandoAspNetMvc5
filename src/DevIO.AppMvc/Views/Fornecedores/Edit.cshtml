@@ -60,3 +60,17 @@
         </div>
     </div>
 </div>
+
+<div>
+    @Html.Partial("_DetalhesEndereco")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            SetModal();
+        });
+    </script>
+}
