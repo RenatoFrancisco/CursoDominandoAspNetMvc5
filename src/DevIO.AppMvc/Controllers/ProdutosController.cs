@@ -5,7 +5,9 @@ using DevIO.Business.Models.Produtos;
 using DevIO.Business.Models.Produtos.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DevIO.AppMvc.Controllers
@@ -17,7 +19,7 @@ namespace DevIO.AppMvc.Controllers
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IMapper _mapper;
 
-        public ProdutosController(IProdutoRepository produtoRepository, 
+        public ProdutosController(IProdutoRepository produtoRepository,
                                   IProdutoService produtoService,
                                   IFornecedorRepository fornecedorRepository,
                                   IMapper mapper)
@@ -57,14 +59,16 @@ namespace DevIO.AppMvc.Controllers
         public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
         {
             produtoViewModel = await PopularFornecedores(produtoViewModel);
+            if (!ModelState.IsValid) return View(produtoViewModel);
 
-            if (ModelState.IsValid)
-            {
-                await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
-                return RedirectToAction("Index");
-            }
+            var imgPrefixo = $"{Guid.NewGuid()}_";
+            if (!UploadImagens(produtoViewModel.ImagemUpload, imgPrefixo))
+                return View(produtoViewModel);
 
-            return View(produtoViewModel);
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+            await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+
+            return RedirectToAction("Index");
         }
 
         [Route("editar-produto/{id:guid}")]
@@ -83,12 +87,29 @@ namespace DevIO.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ProdutoViewModel produtoViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(produtoViewModel);
+
+            var produtoAtualizacao = await ObterProduto(produtoViewModel.Id);
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+
+            if (produtoViewModel.ImagemUpload != null)
             {
-                await _produtoService.Atualizar(_mapper.Map<Produto>(produtoViewModel));
-                return RedirectToAction("Index");
+                var imgPrefixo = $"{Guid.NewGuid()}_";
+                if (!UploadImagens(produtoViewModel.ImagemUpload, imgPrefixo))
+                    return View(produtoViewModel);
+
+                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             }
-            return View(produtoViewModel);
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.Valor = produtoViewModel.Valor;
+            produtoAtualizacao.Ativo = produtoViewModel.Ativo;
+            produtoAtualizacao.FornecedorId = produtoViewModel.FornecedorId;
+            produtoAtualizacao.Fornecedor = produtoViewModel.Fornecedor;
+
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+            return RedirectToAction("Index");
         }
 
         [Route("excluir-produto/{id:guid}")]
@@ -127,6 +148,25 @@ namespace DevIO.AppMvc.Controllers
         {
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
+        }
+
+        private bool UploadImagens(HttpPostedFileBase img, string imgPrefixo)
+        {
+            if (img == null || img.ContentLength <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Imagem em formato inválido!");
+                return false;
+            }
+
+            var path = Path.Combine(HttpContext.Server.MapPath("~/imagens"), imgPrefixo + img.FileName);
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                return false;
+            }
+
+            img.SaveAs(path);
+            return true;
         }
 
         protected override void Dispose(bool disposing)
