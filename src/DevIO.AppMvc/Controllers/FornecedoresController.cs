@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DevIO.AppMvc.Extensions;
 using DevIO.AppMvc.ViewModels;
 using DevIO.Business.Core.Notificacoes;
 using DevIO.Business.Models.Fornecedores;
@@ -33,6 +34,7 @@ namespace DevIO.AppMvc.Controllers
         public async Task<ActionResult> Index() =>
             View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("dados-do-fornecedor/{id:guid}")]
         public async Task<ActionResult> Details(Guid id)
@@ -43,11 +45,12 @@ namespace DevIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
-
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [HttpGet]
         [Route("novo-fornecedor")]
         public ActionResult Create() => View();
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [HttpPost]
         [Route("novo-fornecedor")]
         public async Task<ActionResult> Create(FornecedorViewModel fornecedorViewModel)
@@ -62,6 +65,7 @@ namespace DevIO.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [HttpGet]
         [Route("editar-fornecedor/{id:guid}")]
         public async Task<ActionResult> Edit(Guid id)
@@ -72,6 +76,7 @@ namespace DevIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [HttpPost]
         [Route("editar-fornecedor/{id:guid}")]
         public async Task<ActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
@@ -86,6 +91,7 @@ namespace DevIO.AppMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("exluir-fornecedor/{id:guid}")]
@@ -98,6 +104,7 @@ namespace DevIO.AppMvc.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [Route("exluir-fornecedor/{id:guid}")]
